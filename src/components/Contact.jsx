@@ -118,7 +118,7 @@ export default function Contact() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true }}
           variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
           style={{ marginBottom: "5rem", display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "1vw" }}
         >

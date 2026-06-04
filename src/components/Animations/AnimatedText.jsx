@@ -10,7 +10,7 @@ export function AnimatedChars({ text, className, style, delay = 0, stagger = 0.0
           key={i}
           initial={{ y: "110%", opacity: 0, rotateX: -40 }}
           whileInView={{ y: 0, opacity: 1, rotateX: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true }}
           transition={{
             duration: 0.6,
             delay: delay + i * stagger,
@@ -35,7 +35,7 @@ export function AnimatedWords({ text, className, style, delay = 0 }) {
           <motion.span
             initial={{ y: "120%", opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, margin: "-30px" }}
+            viewport={{ once: true }}
             transition={{
               duration: 0.7,
               delay: delay + i * 0.1,

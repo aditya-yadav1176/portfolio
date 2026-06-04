@@ -51,7 +51,7 @@ export default function About() {
   return (
     <section id="about" ref={sectionRef} style={{ position: "relative", overflow: "hidden", paddingTop: "5rem", paddingBottom: "5rem" }}>
       {/* Scroll line - centered appropriately in the gap between columns */}
-      <div style={{ position: "absolute", top: "6rem", left: "50%", transform: "translateX(-50%)", zIndex: 0 }}>
+      <div className="about-scroll-line" style={{ position: "absolute", top: "6rem", left: "50%", transform: "translateX(-50%)", zIndex: 0 }}>
         <ScrollLine height={450} />
       </div>
 
@@ -169,7 +169,7 @@ export default function About() {
                 whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }}
                 whileHover={{ scale: 1.02, boxShadow: "0 20px 50px rgba(0,0,0,0.35)", transition: { duration: 0.2, ease: "easeOut" } }}
                 animate={{ rotateX: tiltX, rotateY: tiltY }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true }}
                 style={{
                   background: "var(--text)", borderRadius: 24,
                   padding: "2.5rem 2rem",
@@ -254,7 +254,14 @@ export default function About() {
 
         @media (max-width: 1024px) {
           .about-grid { grid-template-columns: 1fr; gap: 4rem; }
-          .about-visual { justify-content: center; margin-top: 2rem; }
+          .about-visual { 
+            justify-content: center !important; 
+            margin-top: 2rem; 
+            transform: none !important; 
+          }
+          .about-scroll-line { 
+            display: none !important; 
+          }
         }
         @media (max-width: 768px) {
           .about-visual { display: flex !important; }
