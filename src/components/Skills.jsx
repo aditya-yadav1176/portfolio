@@ -29,26 +29,34 @@ const iconMap = {
   "Figma": <FaFigma />
 };
 
-// Distribute 15 items into 4 columns
+// Distribute 15 items into 4 columns (Desktop)
 const col1 = newTechStack.slice(0, 4);
 const col2 = newTechStack.slice(4, 8);
 const col3 = newTechStack.slice(8, 12);
 const col4 = newTechStack.slice(12);
 
+// Distribute 15 items into 2 columns (Mobile)
+const mobileCol1 = newTechStack.slice(0, 8);
+const mobileCol2 = newTechStack.slice(8);
+
+
 const TechCard = ({ name }) => (
-  <div style={{
-    width: "100%", aspectRatio: "1",
-    background: "var(--card-bg)", borderRadius: "24px",
-    border: "1px solid var(--border)", position: "relative",
-    display: "flex", flexDirection: "column",
-    alignItems: "center", justifyContent: "center", gap: "1.2rem",
-    boxShadow: "0 8px 30px rgba(0,0,0,0.03)",
-    padding: "1.5rem"
-  }}>
-    <div style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)", color: "var(--text)", opacity: 0.85 }}>
+  <div
+    className="skills-card"
+    style={{
+      width: "100%", aspectRatio: "1",
+      background: "var(--card-bg)", borderRadius: "24px",
+      border: "1px solid var(--border)", position: "relative",
+      display: "flex", flexDirection: "column",
+      alignItems: "center", justifyContent: "center", gap: "1.2rem",
+      boxShadow: "0 8px 30px rgba(0,0,0,0.03)",
+      padding: "1.5rem"
+    }}
+  >
+    <div className="skills-icon-wrap" style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)", color: "var(--text)", opacity: 0.85 }}>
       {iconMap[name] || <BsTerminal />}
     </div>
-    <h3 style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(0.9rem, 1.3vw, 1.25rem)", fontWeight: 600, color: "var(--text-muted)", textAlign: "center", lineHeight: 1.2 }}>
+    <h3 className="skills-card-title" style={{ fontFamily: "var(--font-mono)", fontSize: "clamp(0.9rem, 1.3vw, 1.25rem)", fontWeight: 600, color: "var(--text-muted)", textAlign: "center", lineHeight: 1.2 }}>
       {name}
     </h3>
   </div>
@@ -56,6 +64,7 @@ const TechCard = ({ name }) => (
 
 const Column = ({ items, y, topOffset }) => (
   <motion.div
+    className="skills-column"
     style={{
       y, display: "flex", flexDirection: "column", gap: "2rem",
       width: "24%", maxWidth: "240px", minWidth: "140px", position: "relative",
@@ -72,7 +81,6 @@ const Column = ({ items, y, topOffset }) => (
 export default function Skills() {
   const gallery = useRef(null);
   const [dimension, setDimension] = useState({ width: 0, height: 0 });
-  const [isMobile, setIsMobile] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: gallery,
@@ -101,7 +109,6 @@ export default function Skills() {
 
     const resize = () => {
       setDimension({ width: window.innerWidth, height: window.innerHeight });
-      setIsMobile(window.innerWidth < 768);
     };
 
     window.addEventListener("resize", resize);
@@ -140,36 +147,31 @@ export default function Skills() {
         </div>
       </div>
 
-      {/* Parallax Gallery on Desktop / Grid on Mobile */}
-      {isMobile ? (
-        <div style={{
-          padding: "2rem",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(110px, 1fr))",
-          gap: "1.25rem",
-          background: "var(--bg)",
-          boxSizing: "border-box"
-        }}>
-          {newTechStack.map((name) => (
-            <TechCard key={name} name={name} />
-          ))}
-        </div>
-      ) : (
-        <div
-          ref={gallery}
-          style={{
-            position: "relative", boxSizing: "border-box", display: "flex",
-            height: "120vh", gap: "2.5vw", overflow: "hidden",
-            padding: "2vw", background: "var(--bg)",
-            justifyContent: "center", alignItems: "flex-start"
-          }}
-        >
+      {/* Parallax Gallery */}
+      <div
+        ref={gallery}
+        className="skills-gallery"
+        style={{
+          position: "relative", boxSizing: "border-box", display: "flex",
+          height: "120vh", gap: "2.5vw", overflow: "hidden",
+          padding: "2vw", background: "var(--bg)",
+          justifyContent: "center", alignItems: "flex-start"
+        }}
+      >
+        {/* Desktop Gallery (4 columns) */}
+        <div className="skills-desktop-gallery" style={{ display: "contents" }}>
           <Column items={col1} y={y1} topOffset="-5%" />
           <Column items={col2} y={y2} topOffset="-12%" />
           <Column items={col3} y={y3} topOffset="-8%" />
           <Column items={col4} y={y4} topOffset="-15%" />
         </div>
-      )}
+
+        {/* Mobile Gallery (2 columns) */}
+        <div className="skills-mobile-gallery" style={{ display: "contents" }}>
+          <Column items={mobileCol1} y={y1} topOffset="-5%" />
+          <Column items={mobileCol2} y={y2} topOffset="-12%" />
+        </div>
+      </div>
 
       <div style={{ display: "flex", height: "30vh", alignItems: "center", justifyContent: "center", position: "relative", zIndex: 2, background: "var(--bg)" }}>
         <div style={{ textAlign: "center" }}>
@@ -181,6 +183,89 @@ export default function Skills() {
           </span>
         </div>
       </div>
+
+      <style>{`
+        .skills-mobile-gallery {
+          display: none !important;
+        }
+
+        @media (max-width: 1024px) {
+          .skills-gallery {
+            gap: 1.5vw !important;
+            padding: 1.5vw !important;
+            height: 100vh !important;
+          }
+          .skills-column {
+            width: 23% !important;
+            min-width: 80px !important;
+            gap: 1.25rem !important;
+          }
+          .skills-card {
+            border-radius: 16px !important;
+            padding: 0.75rem !important;
+            gap: 0.5rem !important;
+          }
+          .skills-icon-wrap {
+            font-size: 1.8rem !important;
+          }
+          .skills-card-title {
+            font-size: 0.75rem !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .skills-desktop-gallery {
+            display: none !important;
+          }
+          .skills-mobile-gallery {
+            display: contents !important;
+          }
+          .skills-gallery {
+            gap: 1.5rem !important;
+            padding: 1.5rem !important;
+            height: 90vh !important;
+          }
+          .skills-column {
+            width: 47% !important;
+            min-width: 130px !important;
+            gap: 1.5rem !important;
+          }
+          .skills-card {
+            border-radius: 20px !important;
+            padding: 1.25rem !important;
+            gap: 0.8rem !important;
+          }
+          .skills-icon-wrap {
+            font-size: 2.2rem !important;
+          }
+          .skills-card-title {
+            font-size: 0.9rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .skills-gallery {
+            gap: 1rem !important;
+            padding: 1rem !important;
+          }
+          .skills-column {
+            width: 46% !important;
+            min-width: 110px !important;
+            gap: 1rem !important;
+          }
+          .skills-card {
+            border-radius: 16px !important;
+            padding: 1rem !important;
+            gap: 0.6rem !important;
+          }
+          .skills-icon-wrap {
+            font-size: 1.8rem !important;
+          }
+          .skills-card-title {
+            font-size: 0.8rem !important;
+          }
+        }
+      `}</style>
 
     </section>
   );

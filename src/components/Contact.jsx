@@ -46,38 +46,25 @@ function MagneticEmailCTA() {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ delay: 0.4, duration: 0.8, type: "spring" }}
-      style={{ position: "relative", display: "inline-block", marginBottom: "4rem" }}
+      className="email-cta-wrapper"
     >
       <motion.a
         href={`mailto:${personal.email}`}
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
         whileHover={{ scale: 1.05 }}
-        style={{
-          display: "inline-flex", alignItems: "center", gap: "1.5rem",
-          background: "var(--text)", color: "var(--bg)",
-          padding: "1.25rem 3rem", borderRadius: "100px",
-          fontFamily: "var(--font-body)", fontSize: "1.2rem", fontWeight: 500,
-          textDecoration: "none", overflow: "hidden", position: "relative",
-          boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
-        }}
+        className="email-cta-link"
       >
         <motion.span
           animate={{ x: hovered ? 10 : 0 }}
-          style={{ position: "relative", zIndex: 1, fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}
+          className="email-cta-text"
         >
           {personal.email}
         </motion.span>
         
         <motion.div
           animate={{ x: hovered ? 5 : 0, rotate: hovered ? 45 : 0, scale: hovered ? 1.2 : 1 }}
-          style={{
-            position: "relative", zIndex: 1,
-            width: 40, height: 40, borderRadius: "50%",
-            background: "var(--accent)", color: "var(--text)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: "1.2rem"
-          }}
+          className="email-cta-arrow"
         >
           ↗
         </motion.div>
@@ -171,6 +158,7 @@ export default function Contact() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
+          className="footer-wrapper"
           style={{
             display: "flex", justifyContent: "space-between", alignItems: "center",
             flexWrap: "wrap", gap: "1rem",
@@ -192,6 +180,91 @@ export default function Contact() {
           </span>
         </motion.div>
       </div>
+
+      <style>{`
+        .email-cta-wrapper {
+          position: relative;
+          display: inline-block;
+          margin-bottom: 4rem;
+        }
+        .email-cta-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 1.5rem;
+          background: var(--text);
+          color: var(--bg);
+          padding: 1.25rem 3rem;
+          border-radius: 100px;
+          font-family: var(--font-body);
+          font-size: 1.2rem;
+          font-weight: 500;
+          text-decoration: none;
+          overflow: hidden;
+          position: relative;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .email-cta-text {
+          position: relative;
+          z-index: 1;
+          font-family: var(--font-mono);
+          letter-spacing: 0.05em;
+        }
+        .email-cta-arrow {
+          position: relative;
+          z-index: 1;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: var(--accent);
+          color: var(--text);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+        }
+        .footer-wrapper {
+          width: 100%;
+        }
+
+        @media (max-width: 768px) {
+          .email-cta-link {
+            padding: 1rem 2rem;
+            gap: 1.2rem;
+            font-size: 1.05rem;
+          }
+          .email-cta-arrow {
+            width: 36px;
+            height: 36px;
+            font-size: 1.1rem;
+          }
+          .email-cta-wrapper {
+            margin-bottom: 3.5rem;
+          }
+          .footer-wrapper {
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            text-align: center !important;
+            gap: 0.75rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .email-cta-link {
+            padding: 0.85rem 1.35rem;
+            gap: 0.8rem;
+            font-size: 0.85rem;
+          }
+          .email-cta-arrow {
+            width: 30px;
+            height: 30px;
+            font-size: 0.9rem;
+          }
+          .email-cta-wrapper {
+            margin-bottom: 3rem;
+          }
+        }
+      `}</style>
     </section>
   );
 }

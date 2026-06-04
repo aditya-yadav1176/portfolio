@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { personal } from "../data/data";
-import { AnimatedWords } from "./Animations/AnimatedText";
 import { ScrollLine } from "./Animations/ScrollLine";
+
 
 function Badge({ children, style }) {
   return (
@@ -64,7 +64,8 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "4rem" }}
+            style={{ display: "flex", alignItems: "center", gap: "1rem" }}
+            className="about-label"
           >
             <span style={{
               fontFamily: "var(--font-mono)", fontSize: "0.78rem",
@@ -79,19 +80,6 @@ export default function About() {
 
           {/* 1. Text description component (First in DOM) */}
           <div style={{ textAlign: "left", display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-            <h2 style={{
-              fontFamily: "var(--font-head)",
-              fontSize: "clamp(2.5rem, 5vw, 4.5rem)",
-              lineHeight: 0.95, letterSpacing: "0.01em",
-              marginBottom: "1.5rem", color: "var(--text)",
-            }}>
-              <AnimatedWords text="Mumbai-based Frontend" delay={0.1} />
-              <br />
-              <span style={{ color: "var(--accent-dark)" }}>
-                <AnimatedWords text="Developer & UI Nerd" delay={0.3} />
-              </span>
-            </h2>
-
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -99,9 +87,10 @@ export default function About() {
               transition={{ duration: 0.7, delay: 0.4 }}
               style={{
                 fontFamily: "var(--font-body)", fontSize: "1.05rem",
-                color: "var(--text-muted)", lineHeight: 1.75, marginBottom: "2rem",
+                color: "var(--text-muted)", lineHeight: 1.75,
                 maxWidth: 480,
               }}
+              className="about-description"
             >
               I’m Aditya Yadav — a frontend developer who loves turning ideas into clean, interactive web experiences. Based in Mumbai and currently pursuing B.E. in IT, I focus on building user-centric interfaces while constantly learning through real-world projects.
             </motion.p>
@@ -112,7 +101,8 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.55 }}
-              style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "0.75rem", marginBottom: "2.5rem" }}
+              style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "0.75rem" }}
+              className="about-badges"
             >
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
                 <Badge><span>📍</span> {personal.location}</Badge>
@@ -240,6 +230,9 @@ export default function About() {
       <style>{`
         .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; }
         .about-visual { display: flex; }
+        .about-label { margin-bottom: 4rem; }
+        .about-description { margin-bottom: 2rem; }
+        .about-badges { margin-bottom: 2.5rem; }
         
         @keyframes pulse-white {
           0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
@@ -253,10 +246,13 @@ export default function About() {
         }
 
         @media (max-width: 1024px) {
-          .about-grid { grid-template-columns: 1fr; gap: 4rem; }
+          .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+          .about-label { margin-bottom: 1.5rem; }
+          .about-description { margin-bottom: 1rem; }
+          .about-badges { margin-bottom: 1.25rem; }
           .about-visual { 
             justify-content: center !important; 
-            margin-top: 2rem; 
+            margin-top: 0 !important; 
             transform: none !important; 
           }
           .about-scroll-line { 

@@ -66,6 +66,7 @@ function BentoCard({ project, index }) {
           y: isHovered ? -15 : 0
         }}
         transition={{ duration: 0.3 }}
+        className="bento-header"
         style={{
           position: "absolute",
           top: 0,
@@ -102,6 +103,7 @@ function BentoCard({ project, index }) {
       <motion.div
         animate={{ opacity: isHovered ? 0 : 1, y: isHovered ? 10 : 0 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
+        className="bento-tag"
         style={{
           position: "absolute", bottom: "1.75rem", left: "1.75rem", zIndex: 5
         }}
@@ -120,6 +122,7 @@ function BentoCard({ project, index }) {
         initial={false}
         animate={{ y: isHovered ? "0%" : "102%" }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="bento-hover-overlay"
         style={{
           position: "absolute",
           top: 0,
@@ -261,6 +264,14 @@ export default function Projects() {
           .bento-card {
             grid-column: span 2 !important;
             grid-row: span 1 !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .bento-hover-overlay {
+            transform: none !important;
+          }
+          .bento-header, .bento-tag {
+            display: none !important;
           }
         }
         @media (max-width: 600px) {
