@@ -89,7 +89,7 @@ export const projects = [
     color: "#f87171",
     tag: "Maps",
     github: "https://github.com/aditya-yadav1176/Real-Time-Device-Tracker",
-    live: "",
+    live: "https://real-time-device-tracker-zmp2.onrender.com/",
     layout: { width: "span 1", height: "span 1" },
   },
   {
