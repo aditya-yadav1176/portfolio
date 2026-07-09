@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring, useMotionValue } from "framer-motion";
 import "./styles/globals.css";
 
 import Navbar from "./components/Navbar";
@@ -11,18 +11,38 @@ import Process from "./components/Process";
 import StatsSection from "./components/Stats";
 import Contact from "./components/Contact";
 
-// Cursor glow that follows mouse
 function CursorGlow() {
-  const [pos, setPos] = useState({ x: -400, y: -400 });
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const scale = useMotionValue(1);
+
+  const springConfig = { damping: 25, stiffness: 400, mass: 0.5 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
+  const scaleSpring = useSpring(scale, { damping: 20, stiffness: 300, mass: 0.5 });
+
   useEffect(() => {
-    const move = (e) => setPos({ x: e.clientX, y: e.clientY });
+    const move = (e) => {
+      cursorX.set(e.clientX - 10);
+      cursorY.set(e.clientY - 10);
+
+      // Check if hovering over a clickable element for Cuberto effect
+      const target = e.target;
+      const isClickable = target.closest("a, button, input, textarea, select, [role='button']");
+      scale.set(isClickable ? 2.5 : 1);
+    };
     window.addEventListener("mousemove", move);
     return () => window.removeEventListener("mousemove", move);
-  }, []);
+  }, [cursorX, cursorY, scale]);
+
   return (
-    <div
+    <motion.div
       className="cursor-glow"
-      style={{ left: pos.x, top: pos.y }}
+      style={{
+        x: cursorXSpring,
+        y: cursorYSpring,
+        scale: scaleSpring,
+      }}
     />
   );
 }

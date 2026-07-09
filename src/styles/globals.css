@@ -91,15 +91,14 @@ body {
   opacity: 0.4;
 }
 
-/* Cursor glow effect */
+/* Cursor effect */
 .cursor-glow {
-  width: 400px;
-  height: 400px;
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  mix-blend-mode: difference;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(163,230,53,0.12) 0%, transparent 70%);
   position: fixed;
   pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 0;
-  transition: opacity 0.3s ease;
+  z-index: 9999;
 }
