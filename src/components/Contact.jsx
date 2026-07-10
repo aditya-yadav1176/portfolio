@@ -3,36 +3,51 @@ import { motion } from "framer-motion";
 import { personal } from "../data/data";
 
 function SocialLink({ href, label, index }) {
+  const [hovered, setHovered] = useState(false);
+
   return (
-    <motion.a
-      href={href}
-      target={href.startsWith("mailto") ? undefined : "_blank"}
-      rel="noopener noreferrer"
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 + 0.4 }}
-      whileHover={{ scale: 1.06, y: -3 }}
-      style={{
-        display: "inline-flex", alignItems: "center", gap: "0.5rem",
-        padding: "0.8rem 1.6rem", borderRadius: "100px",
-        border: "1px solid var(--border)",
-        fontFamily: "var(--font-mono)", fontSize: "0.85rem",
-        color: "var(--text-muted)", textDecoration: "none",
-        transition: "all 0.2s ease",
-        background: "var(--card-bg)",
-      }}
-      onMouseEnter={e => {
-        e.currentTarget.style.borderColor = "var(--text)";
-        e.currentTarget.style.color = "var(--text)";
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.borderColor = "var(--border)";
-        e.currentTarget.style.color = "var(--text-muted)";
-      }}
     >
-      {label}
-    </motion.a>
+      <motion.a
+        href={href}
+        target={href.startsWith("mailto") ? undefined : "_blank"}
+        rel="noopener noreferrer"
+        whileHover={{ scale: 1.06, y: -3 }}
+        onHoverStart={() => setHovered(true)}
+        onHoverEnd={() => setHovered(false)}
+        style={{
+          display: "inline-flex", alignItems: "center", gap: "0.5rem",
+          padding: "0.8rem 1.6rem", borderRadius: "100px",
+          border: "1px solid var(--border)",
+          fontFamily: "var(--font-mono)", fontSize: "0.85rem",
+          color: "var(--text-muted)", textDecoration: "none",
+          transition: "all 0.2s ease",
+          background: "var(--card-bg)",
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.borderColor = "var(--text)";
+          e.currentTarget.style.color = "var(--text)";
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.borderColor = "var(--border)";
+          e.currentTarget.style.color = "var(--text-muted)";
+        }}
+      >
+        <motion.span animate={{ x: hovered ? 3 : 0 }}>
+          {label}
+        </motion.span>
+        <motion.span
+          animate={{ x: hovered ? 3 : 0, rotate: hovered ? 45 : 0 }}
+          style={{ display: "inline-block" }}
+        >
+          ↗
+        </motion.span>
+      </motion.a>
+    </motion.div>
   );
 }
 
@@ -135,9 +150,9 @@ export default function Contact() {
         {/* Social links */}
         <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "1rem", marginBottom: "5rem" }}>
           {[
-            { href: personal.github, label: "GitHub ↗" },
-            { href: personal.linkedin, label: "LinkedIn ↗" },
-            { href: personal.instagram, label: "Instagram ↗" },
+            { href: personal.github, label: "GitHub" },
+            { href: personal.linkedin, label: "LinkedIn" },
+            { href: personal.instagram, label: "Instagram" },
           ].map((link, i) => (
             <SocialLink key={link.href} {...link} index={i} />
           ))}
