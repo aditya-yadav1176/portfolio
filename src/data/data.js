@@ -52,20 +52,34 @@ export const skills = {
 export const projects = [
   {
     id: 1,
-    title: "Kino",
-    subtitle: "A Private Cinema Journal",
-    description: "Save what to watch from every streaming platform in one quiet place. Recommend films to friends, frictionless.",
+    title: "Pigeon",
+    subtitle: "Temporary Cross-Device File Sharing",
+    description: "Fast, temporary file sharing between devices — no login, no installation. Drop a file, get a short code, and pick it up on another device.",
     role: "Frontend Developer",
-    tech: ["React", "Vite", "Tailwind CSS", "Framer Motion"],
+    tech: ["React 19", "TypeScript", "TanStack Router", "TanStack Query", "Tailwind CSS"],
+    period: "2025",
+    color: "#2563eb",
+    tag: "File Sharing",
+    github: "https://github.com/aditya-yadav1176/pigeon",
+    live: "https://usepigeon.vercel.app/",
+    layout: { width: "span 2", height: "span 1" },
+  },
+  {
+    id: 2,
+    title: "Kino",
+    subtitle: "A Private Cinema & Series Journal",
+    description: "A minimalist cinema and TV discovery platform for cinephiles. Explore trending titles, manage a drag-and-drop watchlist, and share personalized recommendations.",
+    role: "Frontend Developer",
+    tech: ["React", "Vite", "Tailwind CSS", "TanStack Query", "Radix UI"],
     period: "2025",
     color: "#a3e635",
     tag: "Cinema",
     github: "https://github.com/aditya-yadav1176/kino",
     live: "https://watchkino.vercel.app/",
-    layout: { width: "span 2", height: "span 1" },
+    layout: { width: "span 1", height: "span 1" },
   },
   {
-    id: 2,
+    id: 3,
     title: "MedTalk",
     subtitle: "AI Medical Chatbot",
     description: "A simple AI-powered medical chatbot built using Flask and Google Gemini API that provides short, beginner-friendly health information with voice input support.",
@@ -79,7 +93,7 @@ export const projects = [
     layout: { width: "span 1", height: "span 1" },
   },
   {
-    id: 3,
+    id: 4,
     title: "Real-Time Device Tracker",
     subtitle: "Live Location Tracking System",
     description: "A real-time device tracking web app that shares live user locations on an interactive map using Socket.IO and Leaflet.js.",
@@ -90,10 +104,10 @@ export const projects = [
     tag: "Maps",
     github: "https://github.com/aditya-yadav1176/Real-Time-Device-Tracker",
     live: "https://real-time-device-tracker-zmp2.onrender.com/",
-    layout: { width: "span 1", height: "span 1" },
+    layout: { width: "span 2", height: "span 1" },
   },
   {
-    id: 4,
+    id: 5,
     title: "Docs Mini App",
     subtitle: "Interactive Draggable Notes",
     description: "A minimal and interactive notes app built with React where users can create, drag, and manage notes with a clean UI and local storage persistence.",
@@ -107,7 +121,7 @@ export const projects = [
     layout: { width: "span 2", height: "span 1" },
   },
   {
-    id: 5,
+    id: 6,
     title: "QR Code Generator",
     subtitle: "Instant QR Code Generator",
     description: "A simple and responsive QR Code Generator that converts text or URLs into QR codes instantly and allows users to download them as images.",
@@ -118,10 +132,10 @@ export const projects = [
     tag: "Utility",
     github: "https://github.com/aditya-yadav1176/qr-code-generator",
     live: "https://aditya-yadav1176.github.io/qr-code-generator/",
-    layout: { width: "span 2", height: "span 1" },
+    layout: { width: "span 1", height: "span 1" },
   },
   {
-    id: 6,
+    id: 7,
     title: "Number Clicking Game",
     subtitle: "Fast-Paced Speed Game",
     description: "A fun and fast-paced Number Clicking Game where you must click the number shown in the 'Hit' section before the timer runs out. Test your speed and accuracy before time's up!",
@@ -132,7 +146,7 @@ export const projects = [
     tag: "Gaming",
     github: "https://github.com/aditya-yadav1176/NumberClickingGame",
     live: "https://aditya-yadav1176.github.io/NumberClickingGame/",
-    layout: { width: "span 1", height: "span 1" },
+    layout: { width: "span 3", height: "span 1" },
   },
 ];
 
@@ -168,7 +182,7 @@ export const process = [
 ];
 
 export const stats = [
-  { value: 6, label: "Projects Shipped", suffix: "+" },
+  { value: 7, label: "Projects Shipped", suffix: "+" },
   { value: 4, label: "Hackathons", suffix: "+" },
   { value: 4, label: "Certifications", suffix: "+" },
   { value: 1, label: "Year Building", suffix: "+" },

@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
 import { projects } from "../data/data";
 import { useState } from "react";
-import { FaFilm, FaStethoscope, FaMapMarkerAlt, FaStickyNote, FaQrcode, FaGamepad } from "react-icons/fa";
+import { FaPaperPlane, FaFilm, FaStethoscope, FaMapMarkerAlt, FaStickyNote, FaQrcode, FaGamepad } from "react-icons/fa";
 
 const projectIconMap = {
-  1: <FaFilm />,
-  2: <FaStethoscope />,
-  3: <FaMapMarkerAlt />,
-  4: <FaStickyNote />,
-  5: <FaQrcode />,
-  6: <FaGamepad />
+  1: <FaPaperPlane />,
+  2: <FaFilm />,
+  3: <FaStethoscope />,
+  4: <FaMapMarkerAlt />,
+  5: <FaStickyNote />,
+  6: <FaQrcode />,
+  7: <FaGamepad />
 };
 
 
@@ -24,10 +25,11 @@ function BentoCard({ project, index }) {
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay: index * 0.08 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
+      data-cursor="project"
       style={{
         ...shape,
         background: project.color || "var(--card-bg)",
@@ -37,7 +39,7 @@ function BentoCard({ project, index }) {
         border: "1px solid var(--border)",
         boxShadow: "0 6px 20px rgba(0,0,0,0.02)",
         transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease",
-        transform: isHovered ? "scale(0.98)" : "scale(1)",
+        transform: isHovered ? "scale(0.985)" : "scale(1)",
         minHeight: "320px",
         display: "block"
       }}

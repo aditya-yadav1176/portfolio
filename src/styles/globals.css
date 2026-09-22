@@ -91,14 +91,25 @@ body {
   opacity: 0.4;
 }
 
-/* Cursor effect */
-.cursor-glow {
-  height: 20px;
-  width: 20px;
-  background-color: white;
-  mix-blend-mode: difference;
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
+/* Custom cursor styling & accessibility */
+@media (pointer: fine) {
+  /* Smooth cursor transition behavior */
+  .custom-cursor-ring {
+    will-change: transform, width, height, border-radius;
+  }
+}
+
+@media (pointer: coarse) {
+  .custom-cursor-ring {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

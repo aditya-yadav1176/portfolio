@@ -249,7 +249,10 @@ export default function Hero() {
 
             <motion.a
               href="/Aditya_Yadav_Resume.pdf"
-              download="Aditya_Yadav_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Resume (opens in a new tab)"
+              data-cursor="button"
               whileHover={{ scale: 1.04, y: -2 }}
               whileTap={{ scale: 0.97 }}
               style={{
@@ -259,10 +262,12 @@ export default function Hero() {
                 border: "1px solid var(--border)",
                 fontFamily: "var(--font-body)", fontWeight: 500, fontSize: "0.95rem",
                 textDecoration: "none",
+                boxShadow: "0 2px 10px rgba(0,0,0,0.03)",
+                transition: "border-color 0.2s ease, box-shadow 0.2s ease",
               }}
             >
-              Download Resume
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              View Resume
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             </motion.a>
           </motion.div>
         </div>
