@@ -80,6 +80,20 @@ export const projects = [
   },
   {
     id: 3,
+    title: "Refova",
+    subtitle: "Referral Discovery & Sharing Platform",
+    description: "Built the responsive frontend for a referral platform with search, referral cards, filtering, and intuitive sharing interactions.",
+    role: "Frontend Developer",
+    tech: ["React 19", "TypeScript", "TanStack Router", "TanStack Query", "Tailwind CSS"],
+    period: "2026",
+    color: "#f97316",
+    tag: "Platform",
+    github: "https://github.com/aditya-yadav1176/refova",
+    live: "https://refova.vercel.app/",
+    layout: { width: "span 2", height: "span 1" },
+  },
+  {
+    id: 4,
     title: "MedTalk",
     subtitle: "AI Medical Chatbot",
     description: "A simple AI-powered medical chatbot built using Flask and Google Gemini API that provides short, beginner-friendly health information with voice input support.",
@@ -93,7 +107,7 @@ export const projects = [
     layout: { width: "span 1", height: "span 1" },
   },
   {
-    id: 4,
+    id: 5,
     title: "Real-Time Device Tracker",
     subtitle: "Live Location Tracking System",
     description: "A real-time device tracking web app that shares live user locations on an interactive map using Socket.IO and Leaflet.js.",
@@ -107,7 +121,7 @@ export const projects = [
     layout: { width: "span 2", height: "span 1" },
   },
   {
-    id: 5,
+    id: 6,
     title: "Docs Mini App",
     subtitle: "Interactive Draggable Notes",
     description: "A minimal and interactive notes app built with React where users can create, drag, and manage notes with a clean UI and local storage persistence.",
@@ -118,10 +132,10 @@ export const projects = [
     tag: "Productivity",
     github: "https://github.com/aditya-yadav1176/Docs-Mini-App",
     live: "https://aditya-yadav1176.github.io/Docs-Mini-App/",
-    layout: { width: "span 2", height: "span 1" },
+    layout: { width: "span 1", height: "span 1" },
   },
   {
-    id: 6,
+    id: 7,
     title: "QR Code Generator",
     subtitle: "Instant QR Code Generator",
     description: "A simple and responsive QR Code Generator that converts text or URLs into QR codes instantly and allows users to download them as images.",
@@ -135,7 +149,7 @@ export const projects = [
     layout: { width: "span 1", height: "span 1" },
   },
   {
-    id: 7,
+    id: 8,
     title: "Number Clicking Game",
     subtitle: "Fast-Paced Speed Game",
     description: "A fun and fast-paced Number Clicking Game where you must click the number shown in the 'Hit' section before the timer runs out. Test your speed and accuracy before time's up!",
@@ -146,7 +160,7 @@ export const projects = [
     tag: "Gaming",
     github: "https://github.com/aditya-yadav1176/NumberClickingGame",
     live: "https://aditya-yadav1176.github.io/NumberClickingGame/",
-    layout: { width: "span 3", height: "span 1" },
+    layout: { width: "span 2", height: "span 1" },
   },
 ];
 
@@ -182,7 +196,7 @@ export const process = [
 ];
 
 export const stats = [
-  { value: 7, label: "Projects Shipped", suffix: "+" },
+  { value: 8, label: "Projects Shipped", suffix: "+" },
   { value: 4, label: "Hackathons", suffix: "+" },
   { value: 4, label: "Certifications", suffix: "+" },
   { value: 1, label: "Year Building", suffix: "+" },
