@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
 import { projects } from "../data/data";
 import { useState } from "react";
-import { FaPaperPlane, FaFilm, FaShareAlt, FaStethoscope, FaMapMarkerAlt, FaStickyNote, FaQrcode, FaGamepad } from "react-icons/fa";
+import { FaShareAlt, FaFilm, FaStickyNote, FaPaperPlane, FaMapMarkerAlt, FaStethoscope, FaQrcode, FaGamepad } from "react-icons/fa";
 
 const projectIconMap = {
-  1: <FaPaperPlane />,
+  1: <FaShareAlt />,
   2: <FaFilm />,
-  3: <FaShareAlt />,
-  4: <FaStethoscope />,
+  3: <FaStickyNote />,
+  4: <FaPaperPlane />,
   5: <FaMapMarkerAlt />,
-  6: <FaStickyNote />,
+  6: <FaStethoscope />,
   7: <FaQrcode />,
   8: <FaGamepad />
 };
