@@ -260,29 +260,20 @@ export default function Projects() {
           gap: 1.5rem;
           align-items: stretch;
         }
-        @media (max-width: 900px) {
+        @media (max-width: 768px) {
           .bento-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
           }
           .bento-card {
-            grid-column: span 2 !important;
+            grid-column: span 1 !important;
             grid-row: span 1 !important;
           }
-        }
-        @media (max-width: 768px) {
           .bento-hover-overlay {
             transform: none !important;
           }
           .bento-header, .bento-tag {
             display: none !important;
-          }
-        }
-        @media (max-width: 600px) {
-          .bento-grid {
-            grid-template-columns: 1fr;
-          }
-          .bento-card {
-            grid-column: span 1 !important;
           }
         }
       `}</style>
