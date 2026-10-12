@@ -37,21 +37,24 @@ function BentoCard({ project, index }) {
         borderRadius: "24px",
         position: "relative",
         overflow: "hidden",
-        border: "1px solid var(--border)",
+        border: `1.5px solid ${project.color || "var(--border)"}`,
         boxShadow: "0 6px 20px rgba(0,0,0,0.02)",
         transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease",
         transform: isHovered ? "scale(0.985)" : "scale(1)",
-        minHeight: "320px",
-        display: "block"
+        minHeight: "350px",
+        display: "grid",
+        gridTemplateColumns: "minmax(0, 1fr)"
       }}
       className="bento-card"
     >
       {/* Massive Graphic Element covering the empty space */}
-      <div style={{
-        position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
-        pointerEvents: "none"
-      }}>
-        {/* A huge blurred or solid abstract representation of the project icon */}
+      <div
+        className="bento-bg-icon"
+        style={{
+          position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
+          pointerEvents: "none"
+        }}
+      >
         <div style={{
           fontSize: "clamp(7rem, 14vw, 12rem)",
           color: "var(--bg)", opacity: 0.35, mixBlendMode: "overlay",
@@ -84,11 +87,12 @@ function BentoCard({ project, index }) {
           pointerEvents: "none"
         }}
       >
-        <div>
+        <div style={{ minWidth: 0 }}>
           <h3 style={{ 
             fontFamily: "var(--font-head)", fontSize: "clamp(1.8rem, 2.2vw, 2.5rem)", 
-            lineHeight: 1, marginBottom: "0.2rem", 
+            lineHeight: 1, marginBottom: "0.25rem", 
             color: "var(--bg)",
+            overflowWrap: "break-word"
           }}>
             {project.title}
           </h3>
@@ -96,6 +100,7 @@ function BentoCard({ project, index }) {
             fontFamily: "var(--font-mono)", fontSize: "0.85rem", 
             color: "var(--bg)", 
             opacity: 0.9,
+            overflowWrap: "break-word"
           }}>
             {project.subtitle}
           </p>
@@ -120,106 +125,118 @@ function BentoCard({ project, index }) {
         </span>
       </motion.div>
 
-      {/* Smooth Absolute Hover Overlay Layer (covers full height and aligns content cleanly) */}
+      {/* Content Overlay Layer — placed in flow so card always expands to fit content without clipping */}
       <motion.div
         initial={false}
         animate={{ y: isHovered ? "0%" : "102%" }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="bento-hover-overlay"
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
+          gridArea: "1 / 1 / 2 / 2",
+          width: "100%",
+          height: "100%",
           background: "rgba(255, 255, 255, 0.98)",
           backdropFilter: "blur(12px)",
-          padding: "1.5rem",
+          padding: "1.65rem",
           boxShadow: "0 -10px 40px rgba(0,0,0,0.05)",
           zIndex: 20,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between"
+          justifyContent: "space-between",
+          gap: "1.15rem",
+          boxSizing: "border-box",
+          borderRadius: "22px"
         }}
       >
-        <div>
+        <div style={{ minWidth: 0 }}>
           <h3 style={{ 
-            fontFamily: "var(--font-head)", fontSize: "2rem", 
-            lineHeight: 1.1, marginBottom: "0.25rem", color: "var(--text)"
+            fontFamily: "var(--font-head)", fontSize: "clamp(1.85rem, 2.3vw, 2.15rem)", 
+            lineHeight: 1.08, marginBottom: "0.25rem", color: "var(--text)",
+            overflowWrap: "break-word"
           }}>
             {project.title}
           </h3>
           <p style={{ 
             fontFamily: "var(--font-mono)", fontSize: "0.8rem", 
-            color: "var(--text-muted)", marginBottom: "0.75rem"
+            color: "var(--text-muted)", marginBottom: "0.75rem",
+            overflowWrap: "break-word"
           }}>
             {project.subtitle}
           </p>
           <p style={{ 
             fontFamily: "var(--font-body)", 
-            fontSize: project.layout?.width === "span 1" ? "0.8rem" : "0.88rem", 
-            color: "var(--text)", opacity: 0.9, lineHeight: 1.5, marginBottom: "1rem"
+            fontSize: "0.86rem", 
+            color: "var(--text)", opacity: 0.9, lineHeight: 1.55, margin: 0,
+            overflowWrap: "break-word"
           }}>
             {project.description}
           </p>
         </div>
 
-        <div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1rem" }}>
+        <div style={{ minWidth: 0 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1.1rem" }}>
             {project.tech.map(tech => (
               <span key={tech} style={{
                 fontFamily: "var(--font-mono)", fontSize: "0.7rem",
                 background: "var(--bg-2)", color: "var(--text-muted)",
-                padding: "0.2rem 0.65rem", borderRadius: "100px", border: "1px solid var(--border)"
+                padding: "0.22rem 0.65rem", borderRadius: "100px", border: "1px solid var(--border)"
               }}>
                 {tech}
               </span>
             ))}
           </div>
 
-          <div style={{ display: "flex", gap: "0.5rem", width: "100%" }}>
+          <div style={{ display: "flex", gap: "0.55rem", width: "100%", flexWrap: "wrap" }}>
             {project.live && (
               <motion.a
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
                 style={{
-                  width: "125px",
+                  flex: "1 1 115px",
+                  maxWidth: "160px",
                   display: "inline-flex", justifyContent: "center", alignItems: "center",
-                  padding: "0.55rem 0.8rem",
+                  padding: "0.58rem 0.9rem",
                   background: "var(--text)", color: "var(--bg)",
                   borderRadius: "100px", fontFamily: "var(--font-body)",
                   fontSize: "0.8rem", fontWeight: 600, cursor: "pointer",
                   boxShadow: `0 4px 12px var(--accent-glow)`,
                   border: `1px solid var(--accent)`,
                   textDecoration: "none",
-                  textAlign: "center"
+                  textAlign: "center",
+                  whiteSpace: "nowrap"
                 }}
               >
                 Live Demo
               </motion.a>
             )}
-            <motion.a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.03 }}
-              style={{
-                width: "125px",
-                display: "inline-flex", justifyContent: "center", alignItems: "center", gap: "0.4rem",
-                padding: "0.55rem 0.8rem", background: "transparent",
-                color: "var(--text)", borderRadius: "100px",
-                fontFamily: "var(--font-body)", fontSize: "0.8rem",
-                fontWeight: 600, cursor: "pointer",
-                border: `1px solid var(--border)`,
-                textDecoration: "none",
-                textAlign: "center"
-              }}
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-              Github
-            </motion.a>
+            {project.github && (
+              <motion.a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                style={{
+                  flex: "1 1 115px",
+                  maxWidth: "160px",
+                  display: "inline-flex", justifyContent: "center", alignItems: "center", gap: "0.4rem",
+                  padding: "0.58rem 0.9rem", background: "transparent",
+                  color: "var(--text)", borderRadius: "100px",
+                  fontFamily: "var(--font-body)", fontSize: "0.8rem",
+                  fontWeight: 600, cursor: "pointer",
+                  border: `1px solid var(--border)`,
+                  textDecoration: "none",
+                  textAlign: "center",
+                  whiteSpace: "nowrap"
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                Github
+              </motion.a>
+            )}
           </div>
         </div>
       </motion.div>
@@ -255,37 +272,45 @@ export default function Projects() {
       <style>{`
         .bento-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(3, minmax(0, 1fr));
           grid-auto-rows: auto;
           gap: 1.5rem;
           align-items: stretch;
+          width: 100%;
         }
-        @media (max-width: 900px) {
+        @media (max-width: 960px) {
           .bento-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-          .bento-card {
-            grid-column: span 2 !important;
-            grid-row: span 1 !important;
-          }
-        }
-        @media (max-width: 768px) {
-          .bento-hover-overlay {
-            transform: none !important;
-          }
-          .bento-header, .bento-tag {
-            display: none !important;
-          }
-        }
-        @media (max-width: 600px) {
-          .bento-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.25rem;
           }
           .bento-card {
             grid-column: span 1 !important;
+            grid-row: span 1 !important;
+            min-height: auto !important;
+            transform: none !important;
+          }
+          .bento-hover-overlay {
+            transform: none !important;
+            padding: 1.5rem !important;
+          }
+          .bento-header, .bento-tag, .bento-bg-icon {
+            display: none !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .bento-grid {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 1.25rem;
+          }
+          .bento-card {
+            grid-column: span 1 !important;
+          }
+          .bento-hover-overlay {
+            padding: 1.35rem !important;
           }
         }
       `}</style>
     </section>
   );
 }
+
